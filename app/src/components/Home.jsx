@@ -1,10 +1,8 @@
-
 const Home = () => {
+    const header = <h1>Math Gods</h1>
+
     return (
-      <img
-        src="https://i.imgur.com/MK3eW3Am.jpg"
-        alt="Katherine Johnson"
-      />
+      header
     )
 }
 
