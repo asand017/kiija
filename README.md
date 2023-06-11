@@ -1,5 +1,7 @@
-# math-drills
-math drill tool
+# Math Gods - A Learning Tool
+An infinite math problem generator.
+
+Practice makes perfect.
 
 ## Modules TODO
 * Addition

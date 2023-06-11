@@ -2,7 +2,8 @@ import './App.css';
 import Home from './components/Home';
 
 function App() {
-  return <Home/>;
+  const title = "Are You Ready to Become a Math God?";
+  return <Home title={title}/>;
 }
 
 export default App;

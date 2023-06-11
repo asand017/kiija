@@ -1,8 +1,15 @@
-const Home = () => {
-    const header = <h1>Are You Ready to Become a Math God?</h1>
+import '../styles/global.css';
+
+const Home = (props) => {
+    const header = props.title;
 
     return (
-      header
+      <>
+        <div className="Home-container">
+          <h1 className="Title">{header}</h1>
+          <h1>Pick a topic</h1>
+        </div>
+      </>
     )
 }
 
