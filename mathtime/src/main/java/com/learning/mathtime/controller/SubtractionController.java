@@ -10,13 +10,14 @@ import com.learning.mathtime.beans.AdditionSubtractionRequestBean;
 import com.learning.mathtime.common.AdditionSubtractionHelper;
 
 @RestController
-public class AdditionController {
+public class SubtractionController {
 
+    
     @Autowired
     private AdditionSubtractionHelper requestHelper;
     
-    @GetMapping("/arithmetic/addition")
-    public ResponseEntity<String> getAdditionProblems(@RequestBody AdditionSubtractionRequestBean request) {
+    @GetMapping("/arithmetic/subtraction")
+    public ResponseEntity<String> getSubtractionProblems(@RequestBody AdditionSubtractionRequestBean request) {
         // TODO: implement addition problem generation
         String response = requestHelper.responseBuilder(request);
         return ResponseEntity.ok(response);
