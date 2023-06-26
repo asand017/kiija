@@ -1,23 +1,30 @@
 package com.learning.mathtime.common;
 
-import org.springframework.stereotype.Component;
+import java.util.Random;
 
-import com.learning.mathtime.beans.AdditionSubtractionRequestBean;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 @Component
 public class AdditionSubtractionHelper {
 
-    public String responseBuilder(AdditionSubtractionRequestBean request) {
-        String response = "Time to practice!";
-        int numOfOperands = request.getNumOfOperands();
-        int operand1Digits = request.getOperand1Digits();
-        int operand2Digits = request.getOperand2Digits();
-        String type = request.getType();
-        response = response + " | parameters: operands=" + Integer.toString(numOfOperands) + ", "
-            + "digit1=" + Integer.toString(operand1Digits) + ", "
-            + "digit2=" + Integer.toString(operand2Digits) + ", "
-            + "type=" + type;
+    private static final Logger LOGGER = LogManager.getLogger(AdditionSubtractionHelper.class);
 
-        return response;
+    public int getRandomNumber(int numberOfDigits) {
+        int min = (int) Math.pow(10, numberOfDigits - 1);
+        int max = (int) Math.pow(10, numberOfDigits) - 1;
+
+        Random random = new Random();
+        int randomNumber = random.nextInt(max - min + 1) + min;
+        LOGGER.info("generated random number - " + randomNumber);
+        return randomNumber;
+    }
+
+    public Double getRandomNumber(int numberOfDigits, int numberOfDecimals) {
+        // TODO
+        Double randomNumber = 0.0;
+
+        return randomNumber;
     }
 }

@@ -1,30 +1,16 @@
 package com.learning.mathtime.beans;
 
+import java.util.List;
+
 public class AdditionSubtractionRequestBean {
     
     private int numOfOperands;
     
-    private int operand1Digits;
+    private List<Integer> operandDigits;
 
-    private int operand2Digits;
+    private int decimalDigits = 0;
 
     private String type;
-
-    public int getOperand1Digits() {
-        return operand1Digits;
-    }
-
-    public void setOperand1Digits(int operand1Digits) {
-        this.operand1Digits = operand1Digits;
-    }
-
-    public int getOperand2Digits() {
-        return operand2Digits;
-    }
-
-    public void setOperand2Digits(int operand2Digits) {
-        this.operand2Digits = operand2Digits;
-    }
 
     public String getType() {
         return type;
@@ -42,5 +28,19 @@ public class AdditionSubtractionRequestBean {
         this.numOfOperands = numOfOperands;
     }
 
-    
+    public List<Integer> getOperandDigits() {
+        return operandDigits;
+    }
+
+    public void setOperandDigits(List<Integer> operandDigits) {
+        this.operandDigits = operandDigits;
+    }
+
+    public int getDecimalDigits() {
+        return decimalDigits;
+    }
+
+    public void setDecimalDigits(int decimalDigits) {
+        this.decimalDigits = decimalDigits;
+    }
 }
