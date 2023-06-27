@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 
 import com.learning.mathtime.beans.AdditionSubtractionRequestBean;
 import com.learning.mathtime.beans.AdditionSubtractionResponseBean;
-import com.learning.mathtime.common.AdditionSubtractionHelper;
 import com.learning.mathtime.exceptions.ZeroDigitException;
 import com.learning.mathtime.service.AdditionService;
 
@@ -29,9 +28,6 @@ public class AdditionControllerTest {
 
     @Mock
     private AdditionService mockAdditionService;
-
-    @Mock
-    private AdditionSubtractionHelper mockHelper;
 
     @BeforeEach
     public void setUp() {
@@ -47,7 +43,6 @@ public class AdditionControllerTest {
         mockRequest.setNumOfOperands(2);
         mockRequest.setOperandDigits(Arrays.asList(2,2));
 
-        //when(mockHelper.getRandomNumber(2)).thenReturn(4);
         when(mockAdditionService.generateProblems(mockRequest)).thenReturn(mockResponse);
         
         ResponseEntity<AdditionSubtractionResponseBean> resp = controller.getAdditionProblems(mockRequest);
