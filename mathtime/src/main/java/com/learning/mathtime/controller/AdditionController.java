@@ -28,5 +28,4 @@ public class AdditionController {
         return ResponseEntity.ok(response);
     }
 
-    
-}
+}   
