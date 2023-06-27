@@ -6,12 +6,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import com.learning.mathtime.exceptions.ZeroDigitException;
+
 @Component
 public class AdditionSubtractionHelper {
 
     private static final Logger LOGGER = LogManager.getLogger(AdditionSubtractionHelper.class);
 
-    public int getRandomNumber(int numberOfDigits) {
+    public int getRandomNumber(int numberOfDigits) throws ZeroDigitException {
+    
+        if(numberOfDigits == 0){
+            throw new ZeroDigitException("Must have at least 1 digit");
+        }
+
         int min = (int) Math.pow(10, numberOfDigits - 1);
         int max = (int) Math.pow(10, numberOfDigits) - 1;
 
