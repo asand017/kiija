@@ -36,7 +36,7 @@ public class AdditionSubtractionHelperTest {
     @Test
     public void shouldThrowErrorWhenZeroDigits() {
         assertThrows(ZeroDigitException.class, () -> {
-            int randomNum = helper.getRandomNumber(0);
+            helper.getRandomNumber(0);
         });
         
     }
