@@ -1,7 +1,6 @@
 package com.learning.mathtime.controller;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -42,6 +41,7 @@ public class AdditionControllerTest {
         mockRequest.setDecimalDigits(0);
         mockRequest.setNumOfOperands(2);
         mockRequest.setOperandDigits(Arrays.asList(2,2));
+
 
         when(mockAdditionService.generateProblems(mockRequest)).thenReturn(mockResponse);
         

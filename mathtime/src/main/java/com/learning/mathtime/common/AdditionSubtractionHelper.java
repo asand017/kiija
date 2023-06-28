@@ -24,7 +24,7 @@ public class AdditionSubtractionHelper {
 
         Random random = new Random();
         int randomNumber = random.nextInt(max - min + 1) + min;
-        LOGGER.info("generated random number - " + randomNumber);
+        //LOGGER.info("generated random number - " + randomNumber);
         return randomNumber;
     }
 
