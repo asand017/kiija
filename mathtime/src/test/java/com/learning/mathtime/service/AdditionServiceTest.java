@@ -34,7 +34,7 @@ public class AdditionServiceTest {
     }
 
     @Test
-    public void shouldReturnIntegerProblemSet() throws ZeroDigitException {
+    public void shouldReturnAdditionIntegerProblemSet() throws ZeroDigitException {
         AdditionSubtractionRequestBean mockRequest = new AdditionSubtractionRequestBean();
         mockRequest.setType("integer");
         mockRequest.setDecimalDigits(0);
@@ -47,7 +47,7 @@ public class AdditionServiceTest {
     }
 
     @Test
-    public void shouldReturnValidIntegerProblemSet() throws ZeroDigitException { // this test may need to be without mocks
+    public void shouldReturnValidAdditionIntegerProblemSet() throws ZeroDigitException {
         AdditionSubtractionRequestBean mockRequest = new AdditionSubtractionRequestBean();
         mockRequest.setType("integer");
         mockRequest.setDecimalDigits(0);
@@ -60,7 +60,6 @@ public class AdditionServiceTest {
             for(int i = 0; i < mockRequest.getNumOfOperands(); i++){
                 sum = sum + Integer.parseInt(p.getOperands().get(i));
             }
-            //System.out.println(sum + " : " + p.getSolution());
             assertEquals(String.valueOf(sum), p.getSolution());
         }
     }

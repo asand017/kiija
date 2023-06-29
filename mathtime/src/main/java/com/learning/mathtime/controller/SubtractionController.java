@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.learning.mathtime.beans.AdditionSubtractionRequestBean;
 import com.learning.mathtime.beans.AdditionSubtractionResponseBean;
+import com.learning.mathtime.exceptions.ZeroDigitException;
 import com.learning.mathtime.service.SubtractionService;
 
 @RestController
@@ -21,7 +22,7 @@ public class SubtractionController {
     private SubtractionService subtractionService;
     
     @GetMapping("/arithmetic/subtraction")
-    public ResponseEntity<AdditionSubtractionResponseBean> getSubtractionProblems(@RequestBody AdditionSubtractionRequestBean request) {
+    public ResponseEntity<AdditionSubtractionResponseBean> getSubtractionProblems(@RequestBody AdditionSubtractionRequestBean request) throws ZeroDigitException {
         LOGGER.info("Request for subtraction problem set received.");
         AdditionSubtractionResponseBean response = subtractionService.generateProblems(request);
         return ResponseEntity.ok(response);
