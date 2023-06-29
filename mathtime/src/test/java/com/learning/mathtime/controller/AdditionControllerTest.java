@@ -1,7 +1,6 @@
 package com.learning.mathtime.controller;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -35,7 +34,7 @@ public class AdditionControllerTest {
     }
     
     @Test
-    public void shouldReturnProblemSetPayload() throws ZeroDigitException {
+    public void shouldReturnAdditionProblemSetPayload() throws ZeroDigitException {
         AdditionSubtractionResponseBean mockResponse = new AdditionSubtractionResponseBean();
         AdditionSubtractionRequestBean mockRequest = new AdditionSubtractionRequestBean();
         mockRequest.setType("integer");
@@ -46,7 +45,6 @@ public class AdditionControllerTest {
         when(mockAdditionService.generateProblems(mockRequest)).thenReturn(mockResponse);
         
         ResponseEntity<AdditionSubtractionResponseBean> resp = controller.getAdditionProblems(mockRequest);
-        System.out.println(resp.getStatusCode());
         assertNotNull(resp);
 
     }
