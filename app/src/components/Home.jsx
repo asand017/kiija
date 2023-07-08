@@ -1,17 +1,17 @@
 import React from 'react';
 import '../styles/global.css';
 import TopicNavigator from './TopicNavigator';
+import { Box } from '@mui/material';
 
 const Home = (props) => {
-    const header = props?.title || "Are You Ready to Become a Math God?";
+    const header = props?.title || "Kiija Math Wizard";
 
     return (
       <>
-        <div className="Home-container">
+        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
           <h1 className="Title">{header}</h1>
-          <h1>Pick a topic</h1>
           <TopicNavigator/>
-        </div>
+        </Box>
       </>
     );
 }

@@ -15,7 +15,9 @@ Arithmetic
 * Geometry
 * Algebra
 * Calculus
-* Statistics
+* Statistics/Probability
+* Discrete Math
+* Linear Algebra
 
 ### Deploying backend (mathtime *to be renamed by math topic)
 1. cd math-drills/mathtime

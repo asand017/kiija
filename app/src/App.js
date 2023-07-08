@@ -10,7 +10,7 @@ import Home from './components/Home';
 import './App.css';
 
 function App() {
-  const title = "Are You Ready to Become a Math God?";
+  const title = "Kiija Math Wizard";
 
   const router = createBrowserRouter([
     {
@@ -34,5 +34,5 @@ function App() {
     </React.StrictMode>
   );
 }
-//<Home title={title}/>
+
 export default App;
