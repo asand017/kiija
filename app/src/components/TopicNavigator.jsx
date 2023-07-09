@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Paper, Typography, Box } from '@mui/material';
+import { Paper, Typography, Box, Button } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
 const styles = {
@@ -13,7 +13,8 @@ const styles = {
         padding: '2rem 0',  
         overflow: 'hidden', 
         whiteSpace: 'nowrap',
-        textAlign: 'center'
+        textAlign: 'center',
+        cursor: 'pointer',
     },
     red: {
         backgroundColor: 'red',
@@ -27,19 +28,27 @@ const styles = {
 
 const TopicNavigator = () => {
 
+    const navigateToArithmetic = () => {
+        console.log('Go to Artihmetic topics');
+    }
+
+    const navigateToAlgebra = () => {
+        console.log('Go to Algebra topics');
+    }
+
     return (
         <Box sx={styles.container}>
             <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid xs={6} display="flex" justifyContent="center" alignItems="center"> 
-                    <Paper elevation={2} sx={[styles.gridItem, styles.red]}>
-                        <Typography variant="h6">
+                <Grid xs={6} display="flex" justifyContent="center" alignItems="center">
+                    <Paper elevation={2} sx={[styles.gridItem, styles.red]} onClick={navigateToArithmetic}>
+                        <Typography variant="h3">
                             Arithmetic
                         </Typography>
                     </Paper>
                 </Grid> 
                 <Grid xs={6} display="flex" justifyContent="center" alignItems="center"> 
-                    <Paper elevation={2} sx={[styles.gridItem, styles.blue]}>
-                        <Typography variant="h6">
+                    <Paper elevation={2} sx={[styles.gridItem, styles.blue]} onClick={navigateToAlgebra}>
+                        <Typography variant="h3">
                             Algebra
                         </Typography>
                     </Paper>
