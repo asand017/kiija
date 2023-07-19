@@ -4,12 +4,12 @@ import TopicNavigator from './TopicNavigator';
 import { Box } from '@mui/material';
 
 const Home = (props) => {
-    const header = props?.title || "Kiija Math Wizard";
+    const title = "Kiija Math Wizard";
 
     return (
       <>
         <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
-          <h1 className="Title">{header}</h1>
+          <h1 className="Title">{title}</h1>
           <TopicNavigator/>
         </Box>
       </>

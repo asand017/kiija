@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Paper, Typography, Box, Button } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
+import Panel from './common/Panel';
 
 const styles = {
     container: {
@@ -28,31 +29,34 @@ const styles = {
 
 const TopicNavigator = () => {
 
-    const navigateToArithmetic = () => {
-        console.log('Go to Artihmetic topics');
-    }
-
-    const navigateToAlgebra = () => {
-        console.log('Go to Algebra topics');
-    }
+    const topics = [
+        {
+            topic: 'Arithmetic',
+            styles: [styles.gridItem, styles.red],
+            link: '/arthimetic'
+        },
+        {
+            topic: 'Alegbra',
+            styles: [styles.gridItem, styles.blue],
+            link: '/alegbra'
+        }
+    ];
 
     return (
         <Box sx={styles.container}>
             <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid xs={6} display="flex" justifyContent="center" alignItems="center">
-                    <Paper elevation={2} sx={[styles.gridItem, styles.red]} onClick={navigateToArithmetic}>
-                        <Typography variant="h3" className='topic-header'>
-                            Arithmetic
-                        </Typography>
-                    </Paper>
-                </Grid> 
-                <Grid xs={6} display="flex" justifyContent="center" alignItems="center"> 
-                    <Paper elevation={2} sx={[styles.gridItem, styles.blue]} onClick={navigateToAlgebra}>
-                        <Typography variant="h3" className='topic-header'>
-                            Algebra
-                        </Typography>
-                    </Paper>
-                </Grid> 
+                {
+                    topics.map((item, index) => (
+                        <Grid key={index} xs={6} display="flex" justifyContent="center" alignItems="center">
+                            <Panel 
+                                title={item.topic} 
+                                elevation={2} 
+                                styles={item.styles} 
+                                navigationLink={item.link}/>
+                        </Grid>
+                        
+                    ))
+                }
             </Grid>
         </Box>
     );

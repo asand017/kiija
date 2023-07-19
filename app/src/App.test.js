@@ -3,6 +3,6 @@ import App from './App';
 
 test('renders learn react link', () => {
   render(<App />);
-  const linkElement = screen.getByText(/Are You Ready to Become a Math God?/i);
+  const linkElement = screen.getByText(/Kiija Math Wizard/i);
   expect(linkElement).toBeInTheDocument();
 });
