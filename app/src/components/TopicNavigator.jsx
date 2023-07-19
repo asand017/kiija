@@ -17,11 +17,11 @@ const styles = {
         cursor: 'pointer',
     },
     red: {
-        backgroundColor: 'red',
+        backgroundColor: '#86242A',
         color: 'white',
     },
     blue: {
-        backgroundColor: 'blue',
+        backgroundColor: '#5b759a',
         color: 'white'
     }
 }
@@ -41,14 +41,14 @@ const TopicNavigator = () => {
             <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid xs={6} display="flex" justifyContent="center" alignItems="center">
                     <Paper elevation={2} sx={[styles.gridItem, styles.red]} onClick={navigateToArithmetic}>
-                        <Typography variant="h3">
+                        <Typography variant="h3" className='topic-header'>
                             Arithmetic
                         </Typography>
                     </Paper>
                 </Grid> 
                 <Grid xs={6} display="flex" justifyContent="center" alignItems="center"> 
                     <Paper elevation={2} sx={[styles.gridItem, styles.blue]} onClick={navigateToAlgebra}>
-                        <Typography variant="h3">
+                        <Typography variant="h3" className='topic-header'>
                             Algebra
                         </Typography>
                     </Paper>
