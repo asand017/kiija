@@ -3,7 +3,7 @@ import '../styles/global.css';
 import TopicNavigator from './TopicNavigator';
 import { Box } from '@mui/material';
 
-const Home = (props) => {
+const Home = () => {
     const title = "Kiija Math Wizard";
 
     return (
