@@ -1,15 +1,14 @@
 import React from 'react';
-import '../styles/global.css';
+
 import TopicNavigator from './TopicNavigator';
 import { Box } from '@mui/material';
+import Header from './common/Header';
 
 const Home = () => {
-    const title = "Kiija Math Wizard";
-
     return (
       <>
         <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
-          <h1 className="Title">{title}</h1>
+          <Header/>
           <TopicNavigator/>
         </Box>
       </>
