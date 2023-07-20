@@ -5,6 +5,7 @@ import NotFound from '../components/common/NotFound';
 import Home from '../components/Home';
 import Arithmetic from "../components/topics/arithmetic/Arithmetic";
 import Alegbra from "../components/topics/alegbra/Alegbra";
+import { ADDITION, ALEGBRA, ARITHMETIC, SUBTRACTION } from "../components/common/Constants";
 
 const router = createBrowserRouter([
     {
@@ -13,19 +14,19 @@ const router = createBrowserRouter([
         errorElement: <NotFound/>
       },
       {
-        path: "/arithmetic",
+        path: ARITHMETIC,
         element: <Arithmetic/>
       },
       {
-        path: "/alegbra",
+        path: ALEGBRA,
         element: <Alegbra/>
       },
       {
-        path: "/arithmetic/addition",
+        path: ADDITION,
         element: <AdditionModule/>
       },
       {
-        path: "/arithmetic/subtraction",
+        path: SUBTRACTION,
         element: <SubtractionModule/>
       },
 ])

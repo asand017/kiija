@@ -2,30 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import Panel from './common/Panel';
-import { ALEGBRA, ARITHMETIC } from './common/Constants';
-
-const styles = {
-    container: {
-        flexGrow: 1,
-        width: '100%',
-    },
-    gridItem: {
-        width: '90%',
-        padding: '2rem 0',  
-        overflow: 'hidden', 
-        whiteSpace: 'nowrap',
-        textAlign: 'center',
-        cursor: 'pointer',
-    },
-    red: {
-        backgroundColor: '#86242A',
-        color: 'white',
-    },
-    blue: {
-        backgroundColor: '#5b759a',
-        color: 'white'
-    }
-}
+import { ALEGBRA, ARITHMETIC, styles } from './common/Constants';
 
 const TopicNavigator = () => {
 

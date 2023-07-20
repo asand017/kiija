@@ -1,4 +1,5 @@
 import { Typography, Button } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { useNavigate } from "react-router-dom";
 import React from 'react';
 
@@ -13,10 +14,18 @@ const Panel = (props) => {
     }
 
     return(
-        <Button variant="contained" sx={styles} onClick={() => (actionOnClick(props.navigationLink))}>
-            <Typography variant="h3" className='topic-header'>
-                {title}
-            </Typography>
+        <Button variant="contained" sx={styles} 
+            onClick={() => (actionOnClick(props.navigationLink))}>
+            <Grid container spacing={2}>
+                <Grid xs={12}>
+                    <Typography variant="h3" className='topic-header'>
+                        {title}
+                    </Typography>
+                </Grid>
+                <Grid xs={12}>
+                    {props.symbol}
+                </Grid>
+            </Grid>
         </Button>
         
     );
