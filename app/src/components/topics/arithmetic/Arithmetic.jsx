@@ -39,7 +39,11 @@ const Arithmetic = () => {
                     justifyContent="left" 
                     alignItems="center" 
                     sx={{fontSize: "2em", margin: "1em 0.5em"}}>
-                    <div onClick={goBack}> {'< Arithmetic'} </div>
+                    <div 
+                        className="breadcrumb"
+                        onClick={goBack}>
+                            {'< Arithmetic'}
+                        </div>
                 </Grid>
                 {concepts.map((item, index) => (
                     <Grid key={index} xs={6} display="flex" justifyContent="center" alignItems="center">
