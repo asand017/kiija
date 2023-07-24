@@ -27,7 +27,7 @@ const TopicNavigator = () => {
                 </Grid>
                 {
                     topics.map((item, index) => (
-                        <Grid key={index} xs={6} display="flex" justifyContent="center" alignItems="center">
+                        <Grid key={index} xs={12} md={6} display="flex" justifyContent="center" alignItems="center">
                             <Panel 
                                 title={item.topic} 
                                 elevation={2} 
