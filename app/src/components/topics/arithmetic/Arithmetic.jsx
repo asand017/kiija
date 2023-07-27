@@ -26,22 +26,19 @@ const Arithmetic = () => {
         }
     ];
 
-    const goBack = () => {
-        navigate(-1);
-    };
-
     return (
         <Box sx={styles.container}>
             <Header/>
-            <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                sx={{ width: "80%"}}>
                 <Grid xs={12} 
                     display="flex" 
                     justifyContent="left" 
                     alignItems="center" 
-                    sx={{fontSize: "2em", margin: "1em 0.5em"}}>
+                    sx={{fontSize: "1.5em", margin: "1em 1em"}}>
                     <div 
                         className="breadcrumb"
-                        onClick={goBack}>
+                        onClick={() => navigate(-1)}>
                             {'< Arithmetic'}
                         </div>
                 </Grid>
