@@ -11,6 +11,7 @@ export const styles = {
         flexDirection: 'column',
         flexGrow: 1,
         width: '100%',
+        minWidth: '140'
     },
     gridItem: {
         width: '90%',
