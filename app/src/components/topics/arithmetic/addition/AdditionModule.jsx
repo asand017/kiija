@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../../../common/Header";
 import { Box, Button } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styles } from "../../../common/Constants";
+import { PRACTICEPAD, styles } from "../../../common/Constants";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -13,9 +13,14 @@ const AdditionModule = (props) => {
 
     const navigate = useNavigate();
     const [operands, setOperands] = React.useState(2);
+    const url = "/arithmetic/addition";
 
     const handleChange = (event) => {
         setOperands(event.target.value);
+    }
+
+    const navToPracticeArea = (navigation) => {
+        navigate(navigation);
     }
 
     return (
@@ -31,7 +36,7 @@ const AdditionModule = (props) => {
                     <div 
                         className="breadcrumb"
                         onClick={() => navigate(-1)}>
-                            {'< Arithmetic < Addition'}
+                            {'< Arithmetic < Addition'} // TODO make legit breadcrumb
                     </div>
                 </Grid>
                 <Grid xs={12} display="flex" 
@@ -90,7 +95,7 @@ const AdditionModule = (props) => {
                 <Grid xs={12} display="flex" 
                     justifyContent="center" 
                     alignItems="center" > 
-                    <Button variant="contained">Start Practicing</Button>
+                    <Button variant="contained" onClick={() => {navToPracticeArea(PRACTICEPAD)}}>Start Practicing</Button>
                 </Grid>
             </Grid>
         </Box>

@@ -2,6 +2,7 @@ export const ARITHMETIC = '/arithmetic';
 export const ADDITION = '/arithmetic/addition';
 export const SUBTRACTION = '/arithmetic/subtraction';
 export const ALEGBRA = '/alegbra';
+export const PRACTICEPAD = '/practice-pad';
 
 export const styles = {
     container: {
