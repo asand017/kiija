@@ -1,5 +1,6 @@
 package com.learning.kiija.repository;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,17 +13,26 @@ public class Audit {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
+    @Column(name = "user_id")
     private int user_id;
 
+    @Column(name = "action_id")
     private int action_id;
 
-    public int getId() {
+    public Audit() {}
+
+    public Audit(int user_id, int action_id) {
+        setUser_id(user_id);
+        setAction_id(action_id);
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

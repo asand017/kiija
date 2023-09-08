@@ -1,5 +1,6 @@
 package com.learning.kiija.repository;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,17 +13,26 @@ public class Subject {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int subject_id;
+    private Long subject_id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "set_id")
     private int set_id;
 
-    public int getSubject_id() {
+    public Subject() {}
+
+    public Subject(String name, int set_id) {
+        setName(name);
+        setSet_id(set_id);
+    }
+
+    public Long getSubject_id() {
         return subject_id;
     }
 
-    public void setSubject_id(int subject_id) {
+    public void setSubject_id(Long subject_id) {
         this.subject_id = subject_id;
     }
 
