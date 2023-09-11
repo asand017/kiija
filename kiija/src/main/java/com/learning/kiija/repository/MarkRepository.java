@@ -1,7 +1,5 @@
 package com.learning.kiija.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-@Repository
-public interface MarkRepository extends JpaRepository<Mark, Long> {}
+public interface MarkRepository extends CrudRepository<Mark, Integer> {}

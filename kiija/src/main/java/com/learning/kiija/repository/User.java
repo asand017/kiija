@@ -1,6 +1,5 @@
 package com.learning.kiija.repository;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,35 +11,31 @@ import jakarta.persistence.Table;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "subjects_access")
-    private int subjects_access;
+    private Integer subjects_access;
 
     public User() {}
 
-    public User(String username, String password, String email, int subjects_access) {
-        setUsername(username);
-        setPassword(password);
-        setEmail(email);
-        setSubjects_access(subjects_access);
+    public User(String username, String password, String email, Integer subjects_access) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.subjects_access = subjects_access;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -68,11 +63,11 @@ public class User {
         this.email = email;
     }
 
-    public int getSubjects_access() {
+    public Integer getSubjects_access() {
         return subjects_access;
     }
 
-    public void setSubjects_access(int subjects_access) {
+    public void setSubjects_access(Integer subjects_access) {
         this.subjects_access = subjects_access;
     }
 
