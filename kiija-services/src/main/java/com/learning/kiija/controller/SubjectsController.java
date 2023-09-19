@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.learning.kiija.repository.entities.Subject;
+import com.learning.kiija.beans.SubjectsResponseBean;
 import com.learning.kiija.repository.repositories.SubjectRepository;
 
 @RestController
@@ -19,8 +19,10 @@ public class SubjectsController {
     }
 
     @GetMapping("/subjects")
-    public Iterable<Subject> findAllSubjects() {
+    public SubjectsResponseBean findAllSubjects() {
         LOGGER.info("Retrieving Subjects list");
-        return this.subjectRepository.findAll();
+        SubjectsResponseBean resp = new SubjectsResponseBean();
+        resp.setSubjects(this.subjectRepository.findAll());
+        return resp;
     }
 }
