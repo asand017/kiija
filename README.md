@@ -20,6 +20,6 @@ Arithmetic
 * Linear Algebra
 
 ### Deploying backend
-1. cd math-drills/mathtime
-2. ./gradlew build
-3. java -jar ./build/libs/mathtime-0.0.1-SNAPSHOT.jar
+1. cd kiija/kiija-services
+2. ./gradlew clean build
+3. java -jar ./build/libs/kiija-services-0.0.1-SNAPSHOT.jar
