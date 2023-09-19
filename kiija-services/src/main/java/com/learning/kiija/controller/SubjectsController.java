@@ -5,8 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.learning.kiija.repository.Subject;
-import com.learning.kiija.repository.SubjectRepository;
+import com.learning.kiija.repository.entities.Subject;
+import com.learning.kiija.repository.repositories.SubjectRepository;
 
 @RestController
 public class SubjectsController {

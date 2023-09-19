@@ -1,4 +1,4 @@
-package com.learning.kiija.repository;
+package com.learning.kiija.repository.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

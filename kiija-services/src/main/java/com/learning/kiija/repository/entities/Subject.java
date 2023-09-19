@@ -1,4 +1,4 @@
-package com.learning.kiija.repository;
+package com.learning.kiija.repository.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,25 +12,25 @@ public class Subject {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer subject_id;
+    private Integer subjectId;
 
     private String name;
 
-    private Integer set_id;
+    private Integer setId;
 
     public Subject() {}
 
-    public Subject(String name, Integer set_id) {
+    public Subject(String name, Integer setId) {
         this.name = name;
-        this.set_id = set_id;
+        this.setId = setId;
     }
 
-    public Integer getSubject_id() {
-        return subject_id;
+    public Integer getSubjectId() {
+        return subjectId;
     }
 
-    public void setSubject_id(Integer subject_id) {
-        this.subject_id = subject_id;
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
     }
 
     public String getName() {
@@ -41,12 +41,12 @@ public class Subject {
         this.name = name;
     }
 
-    public Integer getSet_id() {
-        return set_id;
+    public Integer getSetId() {
+        return setId;
     }
 
-    public void setSet_id(Integer set_id) {
-        this.set_id = set_id;
+    public void setSetId(Integer setId) {
+        this.setId = setId;
     }
 
     
