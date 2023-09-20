@@ -13,7 +13,7 @@ const AdditionModule = (props) => {
 
     const navigate = useNavigate();
     const [operands, setOperands] = React.useState(2);
-    const url = "/arithmetic/addition";
+    //const url = "/arithmetic/addition";
 
     const handleChange = (event) => {
         setOperands(event.target.value);
@@ -36,7 +36,7 @@ const AdditionModule = (props) => {
                     <div 
                         className="breadcrumb"
                         onClick={() => navigate(-1)}>
-                            {'< Arithmetic < Addition'} // TODO make legit breadcrumb
+                            {'< Arithmetic < Addition'}
                     </div>
                 </Grid>
                 <Grid xs={12} display="flex" 

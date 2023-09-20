@@ -10,20 +10,17 @@ const Panel = (props) => {
 
     const actionOnClick = (navigation) => {
         console.log("navigation link: " + navigation);
-        navigate(navigation)
+        navigate(navigation, {state: props?.data});
     }
 
     return(
-        <Button variant="contained" sx={styles} 
+        <Button variant="text" sx={styles} 
             onClick={() => (actionOnClick(props.navigationLink))}>
             <Grid container spacing={2}>
                 <Grid xs={12}>
                     <Typography variant="h3" className='topic-header'>
                         {title}
                     </Typography>
-                </Grid>
-                <Grid xs={12}>
-                    {props.symbol}
                 </Grid>
             </Grid>
         </Button>
