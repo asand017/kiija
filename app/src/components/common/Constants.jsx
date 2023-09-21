@@ -2,7 +2,6 @@ export const ARITHMETIC = '/subjects/arithmetic';
 export const ADDITION = '/subjects/arithmetic/addition';
 export const SUBTRACTION = '/subjects/arithmetic/subtraction';
 export const ALGEBRA = '/subjects/algebra';
-export const PRACTICEPAD = '/practice-pad';
 export const SUBJECTS = '/subjects';
 
 export const styles = {

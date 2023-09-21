@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Page from "../common/Page";
 import Grid from '@mui/material/Unstable_Grid2';
 import Panel from '../common/Panel';
+import { useLocation } from "react-router-dom";
 
 const Topics = (props) => {
-    const topics = props?.topics || [];
+    const {state} = useLocation();
+    const title = state?.title;
+    const topics = state?.data || [];
+
+    useEffect(() => {
+        console.log(JSON.stringify(topics));
+    }, []);
 
     return(
         <Page>
@@ -17,7 +24,7 @@ const Topics = (props) => {
                         <Panel 
                             title={item.name} 
                             elevation={2} 
-                            navigationLink={"/subjects/"+item?.name.toLowerCase()}/>
+                            navigationLink={"/subjects/"+title.toLowerCase()+"/"+item?.name.toLowerCase()}/>
                     </Grid>
                 ))}
               

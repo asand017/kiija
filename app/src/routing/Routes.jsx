@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import AdditionModule from '../components/topics/arithmetic/addition/AdditionModule';
-import SubtractionModule from '../components/topics/arithmetic/subtraction/SubtractionModule';
+// import AdditionModule from '../components/topics/arithmetic/addition/AdditionModule';
+// import SubtractionModule from '../components/topics/arithmetic/subtraction/SubtractionModule';
 import NotFound from '../components/common/NotFound';
 import Home from '../components/screens/Home';
 //import Arithmetic from "../components/topics/arithmetic/Arithmetic";
 import { ADDITION, ALGEBRA, ARITHMETIC, SUBJECTS, SUBTRACTION } from "../components/common/Constants";
 import Subjects from "../components/screens/Subjects";
 import Topics from "../components/screens/Topics";
-// import PracticePad from "../components/topics/arithmetic/common/PracticePad";
+import Criteria from "../components/screens/Criteria";
 
 const router = createBrowserRouter([
     {
@@ -29,16 +29,12 @@ const router = createBrowserRouter([
     },
     {
       path: ADDITION,
-      element: <AdditionModule/>
+      element: <Criteria/>
     },
     {
       path: SUBTRACTION,
-      element: <SubtractionModule/>
+      element: <Criteria/>
     },
-    // {
-    //   path: PRACTICEPAD,
-    //   element: <PracticePad/>
-    // }
 ])
 
 export default router;

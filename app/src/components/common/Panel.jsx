@@ -10,7 +10,7 @@ const Panel = (props) => {
 
     const actionOnClick = (navigation) => {
         console.log("navigation link: " + navigation);
-        navigate(navigation, {state: props?.data});
+        navigate(navigation, {state: {data: props?.data, title: title}});
     }
 
     return(
