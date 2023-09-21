@@ -2,17 +2,15 @@ package com.learning.kiija.beans;
 
 import java.util.List;
 
-import com.learning.kiija.repository.entities.Subject;
-
 public class SubjectsResponseBean {
     
-    private List<Subject> subjects;
+    private List<SubjectBean> subjects;
 
-    public List<Subject> getSubjects() {
+    public List<SubjectBean> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(List<Subject> subjects) {
+    public void setSubjects(List<SubjectBean> subjects) {
         this.subjects = subjects;
     }
 }
