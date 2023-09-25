@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Page from "../common/Page";
 import { Button } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
@@ -11,16 +11,28 @@ import MenuItem from '@mui/material/MenuItem';
 const Criteria = (props) => {
 
     const navigate = useNavigate();
-    const [operands, setOperands] = React.useState(2);
+    const [operands, setOperands] = useState(2);
+    const [digitsPerOperand, setDigitsPerOperand] = useState([]);
+    const [problemSetRequest, setProblemSetRequest] = useState({});
     //const url = "/arithmetic/addition";
 
-    const handleChange = (event) => {
-        setOperands(event.target.value);
+    const setOperandDigits = (value, index) => {
+        console.log("set " + index + " operand digits: " + value);
+        setOperands(value);
     }
 
     const navToPracticeArea = (navigation) => {
-        navigate(navigation);
+        console.log("set request: " + JSON.stringify(problemSetRequest));
+        //navigate(navigation);
     }
+
+    useEffect(() => {
+        let digits = [];
+        for(let i = 0; i < operands; i++){
+            digits.push(2);
+        }
+        setDigitsPerOperand(digits);
+    }, [operands]);
 
     return (
         <Page>
@@ -53,7 +65,7 @@ const Criteria = (props) => {
                         id="operands-select"
                         value={operands}
                         label="Operands"
-                        onChange={handleChange}
+                        onChange={(event) => {setOperands(event.target.value)}}
                         >
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
@@ -66,16 +78,18 @@ const Criteria = (props) => {
                         </Select>
                     </FormControl>
                 </Grid>
-                {Array.from({length: operands}, (_, index) => (
+                {digitsPerOperand.map((digits, index) => (
                     <Grid xs={12} key={index}>
                         <FormControl sx={{width: "30%"}}>
                         <InputLabel id={"select-digit-count-"+index+"-label"}># of operand {index} digits</InputLabel>
                         <Select
                         labelId={"select-digit-count-"+index+"-label"}
                         id={"select-digit-count-"+index}
-                        value={operands}
+                        value={digits}
                         label={"# of operand "+index+" digits"}
-                        onChange={handleChange}
+                        onChange={(event) => {
+                            setOperandDigits(event.target.value, index);
+                        }}
                         >
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
@@ -94,7 +108,9 @@ const Criteria = (props) => {
                 <Grid xs={12} display="flex" 
                     justifyContent="center" 
                     alignItems="center" > 
-                    <Button variant="contained" onClick={() => {}}>Start Practicing</Button>
+                    <Button variant="contained" onClick={() => {
+                        navToPracticeArea();
+                    }}>Start Practicing</Button>
                 </Grid>
             </Grid>
         </Page>
