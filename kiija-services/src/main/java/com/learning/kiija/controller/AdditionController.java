@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ public class AdditionController {
     @Autowired
     private AdditionService additionService;
 
-    @GetMapping("/arithmetic/addition")
+    @PostMapping("/arithmetic/addition")
     public ResponseEntity<AdditionSubtractionResponseBean> getAdditionProblems(@RequestBody AdditionSubtractionRequestBean request) throws ZeroDigitException {
         LOGGER.info("Request for addition problem set received.");
         AdditionSubtractionResponseBean response = additionService.generateProblems(request);

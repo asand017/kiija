@@ -11,19 +11,25 @@ import MenuItem from '@mui/material/MenuItem';
 const Criteria = (props) => {
 
     const navigate = useNavigate();
+    const [initialized, setInitialized] = useState(false);
     const [operands, setOperands] = useState(2);
     const [digitsPerOperand, setDigitsPerOperand] = useState([]);
     const [problemSetRequest, setProblemSetRequest] = useState({});
-    //const url = "/arithmetic/addition";
+    const [url, setUrl] = useState("/arithmetic/addition"); // '/[subject]/[topic]'
 
     const setOperandDigits = (value, index) => {
         console.log("set " + index + " operand digits: " + value);
         setOperands(value);
     }
 
-    const navToPracticeArea = (navigation) => {
-        console.log("set request: " + JSON.stringify(problemSetRequest));
-        //navigate(navigation);
+    const startPracticing = () => {
+        var req = {
+            numOfOperands: operands,
+            operandDigits: digitsPerOperand,
+            type: "integer"
+        };
+        console.log("set request: " + JSON.stringify(req));
+        setProblemSetRequest(req);
     }
 
     useEffect(() => {
@@ -33,6 +39,37 @@ const Criteria = (props) => {
         }
         setDigitsPerOperand(digits);
     }, [operands]);
+
+    useEffect(() => {
+        if(initialized) {
+            fetch("http://localhost:8080" + url, {
+                method: 'POST',
+                headers: {
+                    'Origin': 'http://localhost',
+                    'Access-Control-Request-Method': 'POST',
+                    'Access-Control-Request-Headers': 'Content-Type',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(problemSetRequest)
+            })
+            .then((res) => {
+                console.log(res);
+                if(!res.ok)
+                    throw new Error('network error');
+                return res.json();
+            }).then((data) => {
+                console.log("data: " + JSON.stringify(data));
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+    }, [problemSetRequest]);
+
+    useEffect(() => {
+        if(!initialized){
+            setInitialized(true);
+        }
+    }, [initialized])
 
     return (
         <Page>
@@ -109,7 +146,7 @@ const Criteria = (props) => {
                     justifyContent="center" 
                     alignItems="center" > 
                     <Button variant="contained" onClick={() => {
-                        navToPracticeArea();
+                        startPracticing();
                     }}>Start Practicing</Button>
                 </Grid>
             </Grid>
