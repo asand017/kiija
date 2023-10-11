@@ -1,26 +1,79 @@
-import React from "react";
-import Header from "../../../common/Header";
-import { Box, Button } from '@mui/material';
+import React, { useState, useEffect } from "react";
+import Page from "../common/Page";
+import { Button } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
-import { styles } from "../../../common/Constants";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useNavigate } from "react-router-dom";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 
-const AdditionModule = (props) => {
+const Criteria = (props) => {
 
     const navigate = useNavigate();
-    const [operands, setOperands] = React.useState(2);
+    const [initialized, setInitialized] = useState(false);
+    const [operands, setOperands] = useState(2);
+    const [digitsPerOperand, setDigitsPerOperand] = useState([]);
+    const [problemSetRequest, setProblemSetRequest] = useState({});
+    const [url, setUrl] = useState("/arithmetic/addition"); // '/[subject]/[topic]'
 
-    const handleChange = (event) => {
-        setOperands(event.target.value);
+    const setOperandDigits = (value, index) => {
+        console.log("set " + index + " operand digits: " + value);
+        setOperands(value);
     }
 
+    const startPracticing = () => {
+        var req = {
+            numOfOperands: operands,
+            operandDigits: digitsPerOperand,
+            type: "integer"
+        };
+        console.log("set request: " + JSON.stringify(req));
+        setProblemSetRequest(req);
+    }
+
+    useEffect(() => {
+        let digits = [];
+        for(let i = 0; i < operands; i++){
+            digits.push(2);
+        }
+        setDigitsPerOperand(digits);
+    }, [operands]);
+
+    useEffect(() => {
+        if(initialized) {
+            fetch("http://localhost:8080" + url, {
+                method: 'POST',
+                headers: {
+                    'Origin': 'http://localhost',
+                    'Access-Control-Request-Method': 'POST',
+                    'Access-Control-Request-Headers': 'Content-Type',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(problemSetRequest)
+            })
+            .then((res) => {
+                console.log(res);
+                if(!res.ok)
+                    throw new Error('network error');
+                return res.json();
+            }).then((data) => {
+                console.log("data: " + JSON.stringify(data));
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+    }, [problemSetRequest]);
+
+    useEffect(() => {
+        if(!initialized){
+            setInitialized(true);
+        }
+    }, [initialized])
+
     return (
-        <Box sx={styles.container}>
-            <Header/>
+        <Page>
+            <>CRITERIA</>
             <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                 sx={{ width: "80%"}}>
                 <Grid xs={12} 
@@ -49,7 +102,7 @@ const AdditionModule = (props) => {
                         id="operands-select"
                         value={operands}
                         label="Operands"
-                        onChange={handleChange}
+                        onChange={(event) => {setOperands(event.target.value)}}
                         >
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
@@ -62,16 +115,18 @@ const AdditionModule = (props) => {
                         </Select>
                     </FormControl>
                 </Grid>
-                {Array.from({length: operands}, (_, index) => (
+                {digitsPerOperand.map((digits, index) => (
                     <Grid xs={12} key={index}>
                         <FormControl sx={{width: "30%"}}>
                         <InputLabel id={"select-digit-count-"+index+"-label"}># of operand {index} digits</InputLabel>
                         <Select
                         labelId={"select-digit-count-"+index+"-label"}
                         id={"select-digit-count-"+index}
-                        value={operands}
+                        value={digits}
                         label={"# of operand "+index+" digits"}
-                        onChange={handleChange}
+                        onChange={(event) => {
+                            setOperandDigits(event.target.value, index);
+                        }}
                         >
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
@@ -90,11 +145,13 @@ const AdditionModule = (props) => {
                 <Grid xs={12} display="flex" 
                     justifyContent="center" 
                     alignItems="center" > 
-                    <Button variant="contained">Start Practicing</Button>
+                    <Button variant="contained" onClick={() => {
+                        startPracticing();
+                    }}>Start Practicing</Button>
                 </Grid>
             </Grid>
-        </Box>
-    );
+        </Page>
+    )
 }
 
-export default AdditionModule;
+export default Criteria;

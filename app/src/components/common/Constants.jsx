@@ -1,7 +1,8 @@
-export const ARITHMETIC = '/arithmetic';
-export const ADDITION = '/arithmetic/addition';
-export const SUBTRACTION = '/arithmetic/subtraction';
-export const ALEGBRA = '/alegbra';
+export const ARITHMETIC = '/subjects/arithmetic';
+export const ADDITION = '/subjects/arithmetic/addition';
+export const SUBTRACTION = '/subjects/arithmetic/subtraction';
+export const ALGEBRA = '/subjects/algebra';
+export const SUBJECTS = '/subjects';
 
 export const styles = {
     container: {
