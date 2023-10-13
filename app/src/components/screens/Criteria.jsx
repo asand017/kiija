@@ -11,11 +11,12 @@ import MenuItem from '@mui/material/MenuItem';
 const Criteria = (props) => {
 
     const navigate = useNavigate();
+    const {state} = useLocation();
     const [initialized, setInitialized] = useState(false);
     const [operands, setOperands] = useState(2);
     const [digitsPerOperand, setDigitsPerOperand] = useState([]);
     const [problemSetRequest, setProblemSetRequest] = useState({});
-    const [url, setUrl] = useState("/arithmetic/addition"); // '/[subject]/[topic]'
+    const [url, setUrl] = useState("/arithmetic/addition"); // '/[subject]/[topic]' <- add logic with useLocation hook
 
     const setOperandDigits = (value, index) => {
         console.log("set " + index + " operand digits: " + value);
@@ -59,6 +60,7 @@ const Criteria = (props) => {
                 return res.json();
             }).then((data) => {
                 console.log("data: " + JSON.stringify(data));
+                navigate(navigation, {state: {problems: data.problems}});
             }).catch((err) => {
                 console.log(err);
             });

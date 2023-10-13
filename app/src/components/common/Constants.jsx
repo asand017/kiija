@@ -3,6 +3,7 @@ export const ADDITION = '/subjects/arithmetic/addition';
 export const SUBTRACTION = '/subjects/arithmetic/subtraction';
 export const ALGEBRA = '/subjects/algebra';
 export const SUBJECTS = '/subjects';
+export const PROBLEMSET = '/problemset';
 
 export const styles = {
     container: {
