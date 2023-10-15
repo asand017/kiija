@@ -8,6 +8,7 @@ import { ADDITION, ALGEBRA, ARITHMETIC, PROBLEMSET, SUBJECTS, SUBTRACTION } from
 import Subjects from "../components/screens/Subjects";
 import Topics from "../components/screens/Topics";
 import Criteria from "../components/screens/Criteria";
+import Problem from "../components/screens/Problem";
 
 const router = createBrowserRouter([
     {

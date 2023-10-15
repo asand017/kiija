@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Page from "../common/Page";
 import { Button } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useNavigate } from "react-router-dom";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 
@@ -16,7 +16,7 @@ const Criteria = (props) => {
     const [operands, setOperands] = useState(2);
     const [digitsPerOperand, setDigitsPerOperand] = useState([]);
     const [problemSetRequest, setProblemSetRequest] = useState({});
-    const [url, setUrl] = useState("/arithmetic/addition"); // '/[subject]/[topic]' <- add logic with useLocation hook
+    const [url, setUrl] = useState(state.navLink); // '/[subject]/[topic]' <- add logic with useLocation hook
 
     const setOperandDigits = (value, index) => {
         console.log("set " + index + " operand digits: " + value);
@@ -60,7 +60,7 @@ const Criteria = (props) => {
                 return res.json();
             }).then((data) => {
                 console.log("data: " + JSON.stringify(data));
-                navigate(navigation, {state: {problems: data.problems}});
+                //navigate(navigation, {state: {problems: data.problems}});
             }).catch((err) => {
                 console.log(err);
             });
