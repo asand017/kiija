@@ -16,7 +16,11 @@ const Criteria = (props) => {
     const [operands, setOperands] = useState(2);
     const [digitsPerOperand, setDigitsPerOperand] = useState([]);
     const [problemSetRequest, setProblemSetRequest] = useState({});
-    const [url, setUrl] = useState(state.navLink); // '/[subject]/[topic]' <- add logic with useLocation hook
+    const [url, setUrl] = useState(state.navLink); // TODO: state.navLink is not the write api endpoint, need to refactor
+
+    useEffect(() => {
+        console.log(url);
+    }, []);
 
     const setOperandDigits = (value, index) => {
         console.log("set " + index + " operand digits: " + value);
