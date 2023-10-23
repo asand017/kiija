@@ -7,6 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import { PROBLEMSET } from "../common/Constants";
 
 const Criteria = (props) => {
 
@@ -16,7 +17,7 @@ const Criteria = (props) => {
     const [operands, setOperands] = useState(2);
     const [digitsPerOperand, setDigitsPerOperand] = useState([]);
     const [problemSetRequest, setProblemSetRequest] = useState({});
-    const [url, setUrl] = useState(state.navLink); // TODO: state.navLink is not the write api endpoint, need to refactor
+    const [url, setUrl] = useState(state.navLink);
 
     useEffect(() => {
         console.log(url);
@@ -64,7 +65,8 @@ const Criteria = (props) => {
                 return res.json();
             }).then((data) => {
                 console.log("data: " + JSON.stringify(data));
-                //navigate(navigation, {state: {problems: data.problems}});
+                console.log(state.title);
+                navigate(PROBLEMSET, {state: {type: state.title, problems: data.problems}});
             }).catch((err) => {
                 console.log(err);
             });
