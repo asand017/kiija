@@ -9,10 +9,15 @@
     font-weight: bold;
 }
 
-.breadcrumb {
+.Title:hover {
     cursor: pointer;
+}
+
+.breadcrumb {
+    align-self: start;
 }
 
 .breadcrumb:hover {
     color: #00f;
+    cursor: pointer;
 }

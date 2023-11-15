@@ -4,7 +4,7 @@ export const SUBTRACTION = '/subjects/arithmetic/subtraction';
 export const ALGEBRA = '/subjects/algebra';
 export const SUBJECTS = '/subjects';
 export const PROBLEMSET = '/problemset';
-
+export const globalWidth = "80%";
 export const styles = {
     container: {
         display: 'flex',
@@ -30,5 +30,13 @@ export const styles = {
     blue: {
         backgroundColor: '#5b759a',
         color: 'white'
+    },
+    flex_centered: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    flex_row: {
+        flexDirection: 'row'
     }
 }

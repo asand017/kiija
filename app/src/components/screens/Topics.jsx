@@ -14,7 +14,7 @@ const Topics = (props) => {
     }, []);
 
     return(
-        <Page>
+        <Page showBreadcrumbs={true}>
             <Grid container rowSpacing={2}>
                 <Grid xs={12} display="flex" justifyContent="center" alignItems="center" sx={{fontSize: "2em"}}>
                     <h2>Pick a Topic</h2>

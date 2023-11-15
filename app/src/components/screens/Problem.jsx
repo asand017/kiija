@@ -13,6 +13,7 @@ const Problem = (props) => {
     const [currentProblem, setCurrentProblem] = useState(0);
     const [problemIndex, setProblemIndex] = useState(0);
     const [problemList, setProblemList] = useState([]);
+    const [ans, setAns] = useState('');
     const type = state.type;
 
     useEffect(() => {
@@ -38,17 +39,24 @@ const Problem = (props) => {
                             <Grid xs={12} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                                 {type}
                             </Grid>
-                            {item.operands.map((operand) => {
+                            {item.operands.map((operand, key) => {
                                 return(
-                                    <Grid xs={12}>{operand}</Grid>
+                                    <Grid key={key} xs={12}>{operand}</Grid>
                                 );
                             })}
                             <Grid>
-                                <TextField id="outlined-basic"
+                                <TextField 
+                                    id="outlined-basic"
                                     label="answer"
                                     variant="outlined"
-                                    autoComplete="off"
                                     type="text"
+                                    value={ans}
+                                    onFocus={(event) => {
+                                        if(event.target.autocomplete)
+                                        {
+                                          event.target.autocomplete = "new-password";
+                                        } 
+                                    }}
                                 />
                             </Grid>
                         </Grid>

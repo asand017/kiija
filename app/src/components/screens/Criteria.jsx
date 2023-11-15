@@ -4,10 +4,11 @@ import Page from "../common/Page";
 import { Button } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import FormControl from '@mui/material/FormControl';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import { PROBLEMSET } from "../common/Constants";
+import { PROBLEMSET, globalWidth } from "../common/Constants";
 
 const Criteria = (props) => {
 
@@ -80,21 +81,9 @@ const Criteria = (props) => {
     }, [initialized])
 
     return (
-        <Page>
-            <>CRITERIA</>
+        <Page showBreadcrumbs={true}>
             <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                sx={{ width: "80%"}}>
-                <Grid xs={12} 
-                    display="flex" 
-                    justifyContent="left" 
-                    alignItems="center" 
-                    sx={{fontSize: "1.5em", margin: "1em 0 0 0"}}>
-                    <div 
-                        className="breadcrumb"
-                        onClick={() => navigate(-1)}>
-                            {'< Arithmetic < Addition'}
-                    </div>
-                </Grid>
+                sx={{ width: globalWidth}}>
                 <Grid xs={12} display="flex" 
                     justifyContent="left" 
                     alignItems="center" >
