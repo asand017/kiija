@@ -83,16 +83,14 @@ const Criteria = (props) => {
     return (
         <Page showBreadcrumbs={true}>
             <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                sx={{ width: globalWidth}}>
+                sx={{ width: globalWidth}} display={'flex'} justifyContent={'center'} alignItems={'center'}>
                 <Grid xs={12} display="flex" 
-                    justifyContent="left" 
+                    justifyContent="center" 
                     alignItems="center" >
                     <h2>Criteria</h2>
                 </Grid>
-                <Grid xs={4} display="flex"
-                    justifyContent="center"
-                    alignItems="center">
-                     <FormControl fullWidth>
+                <Grid xs={12} display="flex" justifyContent="center" alignItems="center">
+                     <FormControl sx={{width: "30%"}}>
                         <InputLabel id="select-operands-label">Operands</InputLabel>
                         <Select
                         labelId="operands-select-label"
@@ -113,30 +111,30 @@ const Criteria = (props) => {
                     </FormControl>
                 </Grid>
                 {digitsPerOperand.map((digits, index) => (
-                    <Grid xs={12} key={index}>
+                    <Grid xs={12} key={index} display={'flex'} justifyContent={'center'} alignItems={'center'}>
                         <FormControl sx={{width: "30%"}}>
-                        <InputLabel id={"select-digit-count-"+index+"-label"}># of operand {index} digits</InputLabel>
-                        <Select
-                        labelId={"select-digit-count-"+index+"-label"}
-                        id={"select-digit-count-"+index}
-                        value={digits}
-                        label={"# of operand "+index+" digits"}
-                        onChange={(event) => {
-                            setOperandDigits(event.target.value, index);
-                        }}
-                        >
-                            <MenuItem value={1}>1</MenuItem>
-                            <MenuItem value={2}>2</MenuItem>
-                            <MenuItem value={3}>3</MenuItem>
-                            <MenuItem value={4}>4</MenuItem>
-                            <MenuItem value={5}>5</MenuItem>
-                            <MenuItem value={6}>6</MenuItem>
-                            <MenuItem value={7}>7</MenuItem>
-                            <MenuItem value={8}>8</MenuItem>
-                            <MenuItem value={9}>9</MenuItem>
-                            <MenuItem value={10}>10</MenuItem>
-                        </Select>
-                    </FormControl>
+                            <InputLabel id={"select-digit-count-"+index+"-label"}># of operand {index} digits</InputLabel>
+                            <Select
+                            labelId={"select-digit-count-"+index+"-label"}
+                            id={"select-digit-count-"+index}
+                            value={digits}
+                            label={"# of operand "+index+" digits"}
+                            onChange={(event) => {
+                                setOperandDigits(event.target.value, index);
+                            }}
+                            >
+                                <MenuItem value={1}>1</MenuItem>
+                                <MenuItem value={2}>2</MenuItem>
+                                <MenuItem value={3}>3</MenuItem>
+                                <MenuItem value={4}>4</MenuItem>
+                                <MenuItem value={5}>5</MenuItem>
+                                <MenuItem value={6}>6</MenuItem>
+                                <MenuItem value={7}>7</MenuItem>
+                                <MenuItem value={8}>8</MenuItem>
+                                <MenuItem value={9}>9</MenuItem>
+                                <MenuItem value={10}>10</MenuItem>
+                            </Select>
+                        </FormControl>
                     </Grid>
                 ))}
                 <Grid xs={12} display="flex" 
