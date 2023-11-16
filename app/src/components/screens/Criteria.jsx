@@ -4,11 +4,11 @@ import Page from "../common/Page";
 import { Button } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import FormControl from '@mui/material/FormControl';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { PROBLEMSET, globalWidth } from "../common/Constants";
+import ApiService from "../../utils/ApiService";
 
 const Criteria = (props) => {
 
@@ -49,28 +49,29 @@ const Criteria = (props) => {
 
     useEffect(() => {
         if(initialized) {
-            fetch("http://localhost:8080" + url, {
-                method: 'POST',
-                headers: {
-                    'Origin': 'http://localhost',
-                    'Access-Control-Request-Method': 'POST',
-                    'Access-Control-Request-Headers': 'Content-Type',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(problemSetRequest)
-            })
-            .then((res) => {
-                console.log(res);
-                if(!res.ok)
-                    throw new Error('network error');
-                return res.json();
-            }).then((data) => {
-                console.log("data: " + JSON.stringify(data));
-                console.log(state.title);
-                navigate(PROBLEMSET, {state: {type: state.title, problems: data.problems}});
-            }).catch((err) => {
-                console.log(err);
-            });
+            const fullUrl = "http://localhost:8080" + url;
+            const fetchProblemSet = async () => {
+                try {
+                    const problemSet = await ApiService.fetchData(fullUrl, {
+                        method: 'POST',
+                        body: JSON.stringify(problemSetRequest)
+                    })
+                    console.log("problemSet: " + JSON.stringify(problemSet));
+                    console.log(state.title);
+                    navigate(PROBLEMSET, {
+                        state: {
+                            type: state.title, 
+                            problems: problemSet.problems, 
+                            apiUrl: fullUrl, 
+                            request: problemSetRequest
+                        }
+                    });
+                } catch (error) {
+                    console.log(error);
+                }
+            };
+            
+            fetchProblemSet();
         }
     }, [problemSetRequest]);
 

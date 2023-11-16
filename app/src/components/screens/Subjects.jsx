@@ -21,7 +21,7 @@ const Subjects = () => {
                 throw new Error('network error');
             return res.json();
         }).then((data) => {
-            console.log("data: " + JSON.stringify(data));
+            //console.log("data: " + JSON.stringify(data));
             setSubjects(data?.subjects);
         }).catch((err) => {
             console.log(err);

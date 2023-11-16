@@ -9,9 +9,9 @@ const Topics = (props) => {
     const title = state?.title;
     const topics = state?.data || [];
 
-    useEffect(() => {
-        console.log(JSON.stringify(topics));
-    }, []);
+    // useEffect(() => {
+    //     console.log(JSON.stringify(topics));
+    // }, []);
 
     return(
         <Page showBreadcrumbs={true}>
