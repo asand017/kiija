@@ -29,7 +29,7 @@ const Problem = (props) => {
     useEffect(() => {
         let newArray = processProblemSet(problemSet);//problemSet.map((item, index) => ({index: index, operands: item.operands, solution: item.solution}));
         //console.log("new problem set: " + JSON.stringify(newArray) + ": " + count);
-        setProblemSet(newArray);
+        setProblemSet(processProblemSet(problemSet));
     }, []);
 
     // useEffect(() => {
@@ -90,7 +90,6 @@ const Problem = (props) => {
     }
 
     const goNext = () => {
-        console.log("goNext");
         storeResult();
         setAnswer('');
         setCorrect(null);
@@ -98,8 +97,6 @@ const Problem = (props) => {
         if(currentProblem+1 < count) {
             setCurrentProblem(currentProblem+1);
         }else{
-            console.log("old set: " + JSON.stringify(problemSet));
-            console.log("new set: " + JSON.stringify(bufferSet));
             setProblemSet(bufferSet);
             setCurrentProblem(0);
         }
@@ -109,7 +106,6 @@ const Problem = (props) => {
         <Page>
             <Paper variant="elevation" elevation={3} sx={{marginTop: '12px'}}>
                 {problemSet.map((item) => {
-                    //console.log(item);
                     if(item.index === currentProblem){ // TODO: add view slider to display in horizontal or vertical
                         return (
                             <Grid container key={item.index} minHeight={320}>
@@ -147,7 +143,7 @@ const Problem = (props) => {
                                                 label={correct !== null ? 
                                                     correct ? 
                                                         "Correct" : "Incorrect" 
-                                                    : "Answer"}
+                                                    : null}
                                                 variant="outlined"
                                                 type="number"
                                                 size="small"
