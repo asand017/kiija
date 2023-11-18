@@ -109,8 +109,13 @@ const Problem = (props) => {
                     if(item.index === currentProblem){ // TODO: add view slider to display in horizontal or vertical
                         return (
                             <Grid container key={item.index} minHeight={320}>
-                                <Grid key={item.index+"_title"} xs={12} sx={[styles.flex_centered]}>
-                                    <h2 key={item.index+"_title_h2"}>{type} ({currentProblem+1} of {count})</h2>
+                                <Grid key={item.index+"_title"} xs={12} sx={[styles.flex_centered]} container>
+                                    {/* <Grid>
+
+                                    </Grid>
+                                    <Grid>
+                                        <h2 key={item.index+"_title_h2"}>{type} ({currentProblem+1} of {count})</h2>
+                                    </Grid> */}
                                 </Grid>
                                 <Grid key={item.index+"_b"} container xs={12} sx={[styles.flex_centered]}>
                                     {item.operands.map((operand, key) => {
@@ -160,6 +165,12 @@ const Problem = (props) => {
                                                     const val = event.target.value;
                                                     setAnswer(val);
                                                 }}
+                                                onKeyDown={e => {
+                                                    if(e.key === "Enter"){
+                                                        checkAnswer(item.solution);
+                                                        e.preventDefault();
+                                                    }
+                                                }}
                                                 sx={{
                                                     '& input:valid + fieldset': {
                                                         borderColor: correct ? 'green' : 'rgba(0,0,0,0.64)',
@@ -197,7 +208,7 @@ const Problem = (props) => {
                                             onClick={() => {
                                                 goNext();
                                             }}>
-                                            {correct ? 'Next' : 'Skip'} <NavigateNextIcon/>
+                                            {correct ? 'Next' : 'Skip'} <NavigateNextIcon/> {/* TODO: fix jitter effect when text changes*/}
                                         </Button>
                                     </Grid>
                                 </Grid>
