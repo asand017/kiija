@@ -6,21 +6,21 @@ import { useLocation } from "react-router-dom";
 
 const Topics = (props) => {
     const {state} = useLocation();
-    const title = state?.title;
-    const topics = state?.data || [];
+    const title = props.title || state?.title;
+    const topics = props.topics || state?.data || [];
 
-    useEffect(() => {
-        console.log(JSON.stringify(topics));
-    }, []);
+    // useEffect(() => {
+    //     console.log(JSON.stringify(topics));
+    // }, []);
 
     return(
-        <Page>
+        <Page showBreadcrumbs={true}>
             <Grid container rowSpacing={2}>
                 <Grid xs={12} display="flex" justifyContent="center" alignItems="center" sx={{fontSize: "2em"}}>
                     <h2>Pick a Topic</h2>
                 </Grid>
                 {topics.map((item, index) => (
-                    <Grid key={index} xs={12} display="flex" justifyContent="center" alignItems="center">
+                    <Grid data-testid={'topics-container'} key={index} xs={12} display="flex" justifyContent="center" alignItems="center">
                         <Panel 
                             title={item.name} 
                             elevation={2} 

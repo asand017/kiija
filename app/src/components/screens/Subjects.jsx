@@ -3,9 +3,10 @@ import Page from "../common/Page";
 import Grid from '@mui/material/Unstable_Grid2';
 import Panel from '../common/Panel';
 
-const Subjects = () => {
-    const [subjects, setSubjects] = useState([]);
+const Subjects = (props) => {
+    const [subjects, setSubjects] = useState(props.subjects || []);
 
+    // TODO: refactor with api util call
     const getSubjects = () => {
         fetch("http://localhost:8080/subjects", {
             method: 'GET',
@@ -21,7 +22,7 @@ const Subjects = () => {
                 throw new Error('network error');
             return res.json();
         }).then((data) => {
-            console.log("data: " + JSON.stringify(data));
+            console.log(JSON.stringify(data?.subjects))
             setSubjects(data?.subjects);
         }).catch((err) => {
             console.log(err);
@@ -39,7 +40,7 @@ const Subjects = () => {
                     <h2>Pick a Subject</h2>
                 </Grid>
                 {subjects.map((item, index) => (
-                    <Grid key={index} xs={12} display="flex" justifyContent="center" alignItems="center">
+                    <Grid data-testid={'subjects-container'} key={index} xs={12} display="flex" justifyContent="center" alignItems="center">
                         <Panel 
                             title={item.name} 
                             elevation={2} 
