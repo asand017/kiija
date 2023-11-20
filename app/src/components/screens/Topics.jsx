@@ -6,8 +6,8 @@ import { useLocation } from "react-router-dom";
 
 const Topics = (props) => {
     const {state} = useLocation();
-    const title = state?.title;
-    const topics = state?.data || [];
+    const title = props.title || state?.title;
+    const topics = props.topics || state?.data || [];
 
     // useEffect(() => {
     //     console.log(JSON.stringify(topics));
@@ -20,7 +20,7 @@ const Topics = (props) => {
                     <h2>Pick a Topic</h2>
                 </Grid>
                 {topics.map((item, index) => (
-                    <Grid key={index} xs={12} display="flex" justifyContent="center" alignItems="center">
+                    <Grid data-testid={'topics-container'} key={index} xs={12} display="flex" justifyContent="center" alignItems="center">
                         <Panel 
                             title={item.name} 
                             elevation={2} 

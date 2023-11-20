@@ -18,11 +18,11 @@ const Criteria = (props) => {
     const [operands, setOperands] = useState(2);
     const [digitsPerOperand, setDigitsPerOperand] = useState([]);
     const [problemSetRequest, setProblemSetRequest] = useState({});
-    const [url, setUrl] = useState(state.navLink);
+    const [url, setUrl] = useState(state?.navLink || '');
 
-    useEffect(() => {
-        console.log(url);
-    }, []);
+    // useEffect(() => {
+    //     console.log(url);
+    // }, []);
 
     const setOperandDigits = (value, index) => {
         console.log("set " + index + " operand digits: " + value);
@@ -100,7 +100,6 @@ const Criteria = (props) => {
                         label="Operands"
                         onChange={(event) => {setOperands(event.target.value)}}
                         >
-                            <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
                             <MenuItem value={3}>3</MenuItem>
                             <MenuItem value={4}>4</MenuItem>
