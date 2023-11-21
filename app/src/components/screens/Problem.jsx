@@ -192,7 +192,7 @@ const Problem = (props) => {
                                         </form>
                                     </Grid>
                                 </Grid>
-                                <Grid key={item.index+"_d"} xs={12} display={'flex'} justifyContent={'center'} alignItems={'center'} container sx={{flexGrow: 1}}>
+                                <Grid key={item.index+"_d"} xs={12} display={'flex'} justifyContent={'center'} alignItems={'center'} container sx={{flexGrow: 1, margin: '1em 0'}}>
                                     <Grid xs={2} display={'flex'} justifyContent={'start'} alignItems={'center'}>
                                         <Button variant="text" 
                                                 style={{display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'black'}}
