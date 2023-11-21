@@ -12,3 +12,11 @@ test('renders Criteria title', () => {
 
     expect(criteriaTitle).toBeInTheDocument();
 })
+
+// test('user can set operand count', () => {
+//     render(<BrowserRouter>
+//         <Criteria/>
+//     </BrowserRouter>);
+
+   
+// })
