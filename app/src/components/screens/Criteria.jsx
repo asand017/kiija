@@ -16,7 +16,7 @@ const Criteria = (props) => {
     const defaultDigits = 2; // default operands to 2
     const {state} = useLocation();
     const [initialized, setInitialized] = useState(false);
-    const [operands, setOperands] = useState(defaultDigits);
+    const [operands, setOperands] = useState(props.operands || defaultDigits);
     const [digitsPerOperand, setDigitsPerOperand] = useState(() => {
         let digits = [];
         for(let i = 0; i < operands; i++){
@@ -111,8 +111,9 @@ const Criteria = (props) => {
                 </Grid>
                 <Grid xs={12} display="flex" justifyContent="center" alignItems="center">
                      <FormControl sx={{width: "30%"}}>
-                        <InputLabel id="select-operands-label">Operands</InputLabel>
+                        <InputLabel id="operands-select-label">Operands</InputLabel>
                         <Select
+                        data-testid="operand-select-element"
                         labelId="operands-select-label"
                         id="operands-select"
                         value={operands}
