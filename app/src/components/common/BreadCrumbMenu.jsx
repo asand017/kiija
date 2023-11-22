@@ -3,11 +3,11 @@ import { Breadcrumbs } from "@mui/material";
 //TODO
 const BreadCrumbMenu = (props) => {
 
-    const breadcrumbNameMap = {
-        '/': 'Home',
-        SUBJECTS: 'Subjects',
-        // todo: add entry for dashboard/user settings
-    }
+    // const breadcrumbNameMap = {
+    //     '/': 'Home',
+    //     SUBJECTS: 'Subjects',
+    //     // todo: add entry for dashboard/user settings
+    // }
 
     const handleClick = (event) => {
         // todo

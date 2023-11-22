@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Page from "../common/Page";
 import Grid from '@mui/material/Unstable_Grid2';
 import Panel from '../common/Panel';
@@ -8,10 +8,6 @@ const Topics = (props) => {
     const {state} = useLocation();
     const title = props.title || state?.title;
     const topics = props.topics || state?.data || [];
-
-    // useEffect(() => {
-    //     console.log(JSON.stringify(topics));
-    // }, []);
 
     return(
         <Page showBreadcrumbs={true}>

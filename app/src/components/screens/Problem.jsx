@@ -1,20 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Grid from '@mui/material/Unstable_Grid2';
 import Page from "../common/Page";
 import { Button, Paper, TextField } from "@mui/material";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import AddIcon from '@mui/icons-material/Add'; // '+'
-import RemoveIcon from '@mui/icons-material/Remove'; // '-'
+//import RemoveIcon from '@mui/icons-material/Remove'; // '-'
 import { styles, SUMMARY } from "../common/Constants";
 import DoorBackIcon from '@mui/icons-material/DoorBack';
 import ApiService from "../../utils/ApiService";
+
+const processProblemSet = (problemSet) => {
+    let processed = [];
+    if(problemSet)
+        processed = problemSet.map((item, index) => ({index: index, operands: item.operands, solution: item.solution}));
+    return processed;
+}
 
 const Problem = (props) => {
 
     const navigate = useNavigate();
     const {state} = useLocation();
-    const [problemSet, setProblemSet] = useState(state.problems); // problem set state
+    const [problemSet, setProblemSet] = useState(processProblemSet(state.problems)); // problem set state
     const [bufferSet, setBufferSet] = useState([]); // buffer for problems on deck
     const [currentProblem, setCurrentProblem] = useState(0); // problem set index of the current displayed problem
     const [answer, setAnswer] = useState(''); // user input answer
@@ -23,30 +30,13 @@ const Problem = (props) => {
     const [numCorrect, setNumCorrect] = useState(0); // # of problems answered correctly on first attempt
     const [numIncorrect, setNumIncorrect] = useState(0); // # of problems answered incorrectly on first attempt
     const [numProblemsAttempted, setNumProblemsAttempted] = useState(0); // # of problems attempted in the session
+    const [numSkipped, setNumSkipped] = useState(0);
     const [attempts, setAttempts] = useState(0); // # of attempts on the current problem
-    const [count, setCount] = useState(state.problems.length); // # problem set array size
+    const count = state.problems.length; // # problem set array size
     const [summaryData, setSummaryData] = useState({}); // session summary object to be sent to Summary screen
     const type = state.type;
     const url = state.apiUrl;
     const problemSetRequest = state.request;
-
-    useEffect(() => {
-        setProblemSet(processProblemSet(problemSet));
-    }, []);
-
-    useEffect(() => {
-        if(currentProblem > (count-3)){
-            fetchMoreProblems();
-        }
-    }, [currentProblem])
-
-    const processProblemSet = (problemSet) => {
-        let processed = [];
-        if(problemSet) {
-            processed = problemSet.map((item, index) => ({index: index, operands: item.operands, solution: item.solution}));
-        }
-        return processed;
-    }
 
     const fetchMoreProblems = () => {
         const fetchProblemSet = async () => {
@@ -64,7 +54,7 @@ const Problem = (props) => {
     }
 
     const checkAnswer = (solution) => {
-        if(Number(solution) == answer){
+        if(Number(solution) === Number(answer)){
             if(!submitted)
                 setNumCorrect(numCorrect+1);
             setIsCorrect(true);
@@ -77,24 +67,24 @@ const Problem = (props) => {
         setAttempts(attempts+1);
     }
 
-    const storeResult = () => {
-        console.log("storeResult");
-        //TODO: push question details, save # correct & incorrect to object that will be passed to summary screen
+    const storeResult = useCallback(() => {
         setSummaryData({
             totalAnswered: numProblemsAttempted,
+            totalSkipped: numSkipped,
             totalCorrect: numCorrect,
-            totalIncorrect: numIncorrect
+            totalIncorrect: numIncorrect,
         })
-    }
+    }, [numProblemsAttempted, numSkipped, numCorrect, numIncorrect])
 
     const goNext = () => {
-        storeResult();
         setAnswer('');
         setAttempts(0);
         setIsCorrect(null);
         setSubmitted(false);
-        setNumProblemsAttempted(numProblemsAttempted+1);
         if(currentProblem+1 < count) {
+            if(currentProblem > (count-3)){
+                fetchMoreProblems();
+            }
             setCurrentProblem(currentProblem+1);
         }else{
             setProblemSet(bufferSet);
@@ -102,24 +92,37 @@ const Problem = (props) => {
         }
     }
 
+    const answerGivenCheck = () => {
+        if(!answer){
+            setNumSkipped(numSkipped+1);
+        }else{
+            setNumProblemsAttempted(numProblemsAttempted+1);
+        }
+    }
+
+    useEffect(() => {
+        storeResult();
+    }, [numSkipped, numProblemsAttempted, storeResult])
+
     return(
         <Page>
             <Paper variant="elevation" elevation={3} sx={{marginTop: '12px'}}>
-                {problemSet.map((item) => {
+                {problemSet.map((item, index) => {
                     if(item.index === currentProblem){ // TODO: add view slider to display in horizontal or vertical
                         return (
-                            <Grid container key={item.index} minHeight={320}>
+                            <Grid container key={item.index} minHeight={320} maxWidth={700}>
                                 <Grid key={item.index+"_title"} xs={12} sx={[styles.flex_centered]} container>
-                                    <Grid key={item.index+"_count"} xs={2} sx={{padding: '6px', alignSelf: 'flex-start'}}>
-                                        <div>Problems done: {numProblemsAttempted}</div>
+                                    <Grid key={item.index+"_count"} xs={3} sx={{padding: '6px', alignSelf: 'flex-start'}}>
+                                        <div>Answered: {numProblemsAttempted}</div>
+                                        <div>Skipped: {numSkipped}</div>
                                         <div>Correct: {numCorrect}</div>
                                         <div>Incorrect: {numIncorrect}</div>
                                     </Grid>
-                                    <Grid key={item.index+"_title_h2_container"} xs={8} sx={[styles.flex_centered]}>
+                                    <Grid key={item.index+"_title_h2_container"} xs={6} sx={[styles.flex_centered]}>
                                         <h2 key={item.index+"_title_h2"}>{type}</h2>
                                     </Grid> 
-                                    <Grid key={item.index+"_attempts"} xs={2} sx={{padding: '6px', alignSelf: 'flex-start'}}>
-                                        <div style={{float: 'right'}}>Attempts: {attempts}</div>
+                                    <Grid key={item.index+"_attempts"} xs={3} sx={{padding: '6px', alignSelf: 'flex-start'}}>
+                                        <div key={item.index+"_attempts_lable"} style={{float: 'right'}}>Attempts: {attempts}</div>
                                     </Grid> {/* Filler cell */}
                                 </Grid>
                                 <Grid key={item.index+"_b"} container xs={12} sx={[styles.flex_centered]}>
@@ -197,7 +200,7 @@ const Problem = (props) => {
                                         <Button variant="text" 
                                                 style={{display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'black'}}
                                                 onClick={() => {
-                                                    storeResult();
+                                                    answerGivenCheck();
                                                     navigate(SUMMARY, {
                                                         state: {
                                                             summary: summaryData,
@@ -210,12 +213,19 @@ const Problem = (props) => {
                                         </Button>
                                     </Grid>
                                     <Grid xs={8} display={'flex'} justifyContent={'center'} alignItems={'center'}>
-                                        <Button disabled={isCorrect} color="primary" variant="outlined" onClick={() => {checkAnswer(item.solution)}}>turn in</Button>
+                                        <Button disabled={isCorrect} 
+                                            color="primary" 
+                                            variant="outlined" 
+                                            onClick={() => {
+                                                checkAnswer(item.solution);
+                                            }}>
+                                            turn in</Button>
                                     </Grid>
                                     <Grid xs={2} display={'flex'} justifyContent={'end'} alignItems={'center'}>
                                         <Button variant="text" 
                                             style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
                                             onClick={() => {
+                                                answerGivenCheck();
                                                 goNext();
                                             }}>
                                             Next <NavigateNextIcon/>
@@ -224,6 +234,8 @@ const Problem = (props) => {
                                 </Grid>
                             </Grid>
                         );
+                    }else{
+                        return(<div key={index}></div>);
                     }
                 })}
             </Paper>
