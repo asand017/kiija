@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import Grid from '@mui/material/Unstable_Grid2';
 import Page from "../common/Page"
 
 const Summary = (props) => {
 
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const {state} = useLocation();
-    const summary = state.summary;
-    const topic = state.topic;
+    const summary = props.summary || state.summary;
+    const topic = props.topic || state.topic;
 
     return(
         <Page>

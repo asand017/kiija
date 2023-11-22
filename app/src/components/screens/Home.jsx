@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Page from '../common/Page';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import { SUBJECTS, styles } from '../common/Constants';
+import { SUBJECTS } from '../common/Constants';
 
 const Home = () => {
     const navigate = useNavigate();

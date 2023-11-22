@@ -5,7 +5,7 @@ import Page from "../common/Page";
 import { Button, Paper, TextField } from "@mui/material";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import AddIcon from '@mui/icons-material/Add'; // '+'
-import RemoveIcon from '@mui/icons-material/Remove'; // '-'
+//import RemoveIcon from '@mui/icons-material/Remove'; // '-'
 import { styles, SUMMARY } from "../common/Constants";
 import DoorBackIcon from '@mui/icons-material/DoorBack';
 import ApiService from "../../utils/ApiService";
@@ -24,7 +24,7 @@ const Problem = (props) => {
     const [numIncorrect, setNumIncorrect] = useState(0); // # of problems answered incorrectly on first attempt
     const [numProblemsAttempted, setNumProblemsAttempted] = useState(0); // # of problems attempted in the session
     const [attempts, setAttempts] = useState(0); // # of attempts on the current problem
-    const [count, setCount] = useState(state.problems.length); // # problem set array size
+    const count = state.problems.length; // # problem set array size
     const [summaryData, setSummaryData] = useState({}); // session summary object to be sent to Summary screen
     const type = state.type;
     const url = state.apiUrl;
