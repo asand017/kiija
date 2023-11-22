@@ -20,6 +20,9 @@ const Summary = (props) => {
                     <div>Answered: {summary.totalAnswered}</div>
                 </Grid>
                 <Grid xs={12}>
+                    <div>Skipped: {summary.totalSkipped}</div>
+                </Grid>
+                <Grid xs={12}>
                     <div>Correct: {summary.totalCorrect}</div>
                 </Grid>
                 <Grid xs={12}>

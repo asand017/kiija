@@ -17,22 +17,28 @@ const Criteria = (props) => {
     const {state} = useLocation();
     const [initialized, setInitialized] = useState(false);
     const [operands, setOperands] = useState(props.operands || defaultDigits);
-    const [digitsPerOperand, setDigitsPerOperand] = useState(() => {
-        let digits = [];
-        for(let i = 0; i < operands; i++){
-            digits.push(2);
+    const [digitsPerOperand, setDigitsPerOperand] = useState(Array.from({ length: operands }, () => 2));
+    const url = process.env.REACT_APP_BASE_URL + state?.navLink || '';
+
+    useEffect(() => {
+        if(!initialized){
+            setInitialized(true);
         }
-        return digits;
-    });
-    const [problemSetRequest, setProblemSetRequest] = useState({});
-    const [url, setUrl] = useState(state?.navLink || '');
+    }, [initialized])
 
-    // useEffect(() => {
-    //     console.log(url);
-    // }, []);
+    const configDigits = (operands) => {
+        const digits = []
+        for(let i = 0; i < operands; i++){
+            if(i < digitsPerOperand.length){
+                digits.push(digitsPerOperand[i]);
+            }else{
+                digits.push(defaultDigits);
+            }
+        }
+        setDigitsPerOperand(digits);
+    }
 
-    const setOperandDigits = (value, index) => {
-        // console.log("set #" + index + " operand digits: " + value);
+    const configOperandDigits = (value, index) => {
         const operandsDigits = [];
         for(let i = 0; i < operands; i++){
             if(i === index){
@@ -41,64 +47,39 @@ const Criteria = (props) => {
                 operandsDigits.push(digitsPerOperand[i]);
             }
         }
-        // console.log("new digits arrayy: " + JSON.stringify(operandsDigits));
         setDigitsPerOperand(operandsDigits);
     }
 
     const startPracticing = () => {
-        var req = {
-            numOfOperands: operands,
-            operandDigits: digitsPerOperand,
-            type: "integer"
-        };
-        console.log("set request: " + JSON.stringify(req));
-        setProblemSetRequest(req);
+        if(initialized){
+            var req = {
+                numOfOperands: operands,
+                operandDigits: digitsPerOperand,
+                type: "integer"
+            };
+            fetchProblemSet(req);
+        }
+        
     }
 
-    useEffect(() => {
-        let digits = [];
-        for(let i = 0; i < operands; i++){ // TODO recover the old operand digit value
-            if(i < digitsPerOperand.length){
-                digits.push(digitsPerOperand[i]);
-            }else{
-                digits.push(defaultDigits);
-            }
-        }
-        setDigitsPerOperand(digits);
-    }, [operands]);
-
-    useEffect(() => {
-        if(initialized) {
-            const fullUrl = "http://localhost:8080" + url;
-            const fetchProblemSet = async () => {
-                try {
-                    const problemSet = await ApiService.fetchData(fullUrl, {
-                        method: 'POST',
-                        body: JSON.stringify(problemSetRequest)
-                    })
-                    console.log("problemSet: " + JSON.stringify(problemSet));
-                    console.log(state.title);
-                    navigate(PROBLEMSET, {
-                        state: {
-                            type: state.title, 
-                            problems: problemSet.problems, 
-                            apiUrl: fullUrl, 
-                            request: problemSetRequest
-                        }
-                    });
-                } catch (error) {
-                    console.log(error);
+    const fetchProblemSet = async (request) => {
+        try {
+            const problemSet = await ApiService.fetchData(url, {
+                method: 'POST',
+                body: JSON.stringify(request)
+            })
+            navigate(PROBLEMSET, {
+                state: {
+                    type: state.title, 
+                    problems: problemSet.problems, 
+                    apiUrl: url,
+                    request: request
                 }
-            };
-            fetchProblemSet();
+            });
+        } catch (error) {
+            console.log(error);
         }
-    }, [problemSetRequest]);
-
-    useEffect(() => {
-        if(!initialized){
-            setInitialized(true);
-        }
-    }, [initialized])
+    };
 
     return (
         <Page showBreadcrumbs={true}>
@@ -118,7 +99,11 @@ const Criteria = (props) => {
                         id="operands-select"
                         value={operands}
                         label="Operands"
-                        onChange={(event) => {setOperands(event.target.value)}}>
+                        onChange={(event) => {
+                            const op = event.target.value;
+                            setOperands(op);
+                            configDigits(op); 
+                        }}>
                             <MenuItem value={2}>2</MenuItem>
                             <MenuItem value={3}>3</MenuItem>
                             <MenuItem value={4}>4</MenuItem>
@@ -139,7 +124,7 @@ const Criteria = (props) => {
                             value={digits}
                             label={"# of operand "+index+" digits"}
                             onChange={(event) => {
-                                setOperandDigits(event.target.value, index);
+                                configOperandDigits(event.target.value, index);
                             }}>
                                 <MenuItem value={1}>1</MenuItem>
                                 <MenuItem value={2}>2</MenuItem>
