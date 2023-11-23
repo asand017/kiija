@@ -51,6 +51,7 @@ const Criteria = (props) => {
     }
 
     const startPracticing = () => {
+        console.log("url: " + url);
         if(initialized){
             var req = {
                 numOfOperands: operands,
@@ -68,6 +69,8 @@ const Criteria = (props) => {
                 method: 'POST',
                 body: JSON.stringify(request)
             })
+
+            console.log(JSON.stringify(problemSet));
             navigate(PROBLEMSET, {
                 state: {
                     type: state.title, 

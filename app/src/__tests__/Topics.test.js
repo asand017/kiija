@@ -1,35 +1,39 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import Topics from '../components/screens/Topics';
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import { BrowserRouter } from 'react-router-dom'
+import Topics from '../components/screens/Topics'
 
 test('renders Topics title', () => {
-    render(<BrowserRouter>
-        <Topics/>
-    </BrowserRouter>);
+    render(
+        <BrowserRouter>
+            <Topics />
+        </BrowserRouter>
+    )
 
-    const topicsTitle = screen.getByText('Pick a Topic');
+    const topicsTitle = screen.getByText('Pick a Topic')
 
-    expect(topicsTitle).toBeInTheDocument();
+    expect(topicsTitle).toBeInTheDocument()
 })
 
 test('render topics', () => {
     const mockData = [
         {
-            "name":"Addition",
-            "id":1
+            name: 'Addition',
+            id: 1,
         },
         {
-            "name":"Subtraction",
-            "id":2
-        }
-    ];
+            name: 'Subtraction',
+            id: 2,
+        },
+    ]
 
-    render(<BrowserRouter>
-        <Topics title={'addition'} topics={mockData}/>
-    </BrowserRouter>);
+    render(
+        <BrowserRouter>
+            <Topics title={'addition'} topics={mockData} />
+        </BrowserRouter>
+    )
 
-    const topics = screen.getAllByTestId('topics-container');
+    const topics = screen.getAllByTestId('topics-container')
 
-    expect(topics).toHaveLength(2);
+    expect(topics).toHaveLength(2)
 })

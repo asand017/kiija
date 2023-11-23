@@ -1,8 +1,7 @@
-import { Breadcrumbs } from "@mui/material";
+import { Breadcrumbs } from '@mui/material'
 
 //TODO
 const BreadCrumbMenu = (props) => {
-
     // const breadcrumbNameMap = {
     //     '/': 'Home',
     //     SUBJECTS: 'Subjects',
@@ -15,11 +14,9 @@ const BreadCrumbMenu = (props) => {
 
     return (
         <div role="presentation" onClick={handleClick}>
-            <Breadcrumbs aria-label="breadcrumbs">
-
-            </Breadcrumbs>
+            <Breadcrumbs aria-label="breadcrumbs"></Breadcrumbs>
         </div>
     )
 }
 
-export default BreadCrumbMenu;
+export default BreadCrumbMenu

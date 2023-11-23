@@ -1,24 +1,25 @@
-import { useNavigate } from 'react-router-dom';
-import '../../styles/global.css';
-import BreadCrumbMenu from './BreadCrumbMenu';
+import { useNavigate } from 'react-router-dom'
+import '../../styles/global.css'
+import BreadCrumbMenu from './BreadCrumbMenu'
 
 const Header = () => {
-    const title = "Kiija Math Wizard";
-    const navigate = useNavigate();
+    const title = 'Kiija Math Wizard'
+    const navigate = useNavigate()
     return (
-        <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignContent: 'center',
-            flexDirection: 'column'
-        }}>
-            <h1 className="Title" 
-                onClick={() => navigate("/")}>
+        <div
+            style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignContent: 'center',
+                flexDirection: 'column',
+            }}
+        >
+            <h1 className="Title" onClick={() => navigate('/')}>
                 {title}
             </h1>
-            <BreadCrumbMenu/>
+            <BreadCrumbMenu />
         </div>
     )
 }
 
-export default Header;
+export default Header
