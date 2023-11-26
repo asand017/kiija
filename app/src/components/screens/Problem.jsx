@@ -29,7 +29,7 @@ const Problem = (props) => {
     ) // problem set state
     const [bufferSet, setBufferSet] = useState([]) // buffer for problems on deck
     const [currentProblem, setCurrentProblem] = useState(0) // problem set index of the current displayed problem
-    const [answer, setAnswer] = useState('') // user input answer
+    const [answer, setAnswer] = useState(props?.answer || '') // user input answer
     const [submitted, setSubmitted] = useState(false) // flag for first problem submission
     const [isCorrect, setIsCorrect] = useState(null) // decision flag if user answer for problem is correct
     const [numCorrect, setNumCorrect] = useState(0) // # of problems answered correctly on first attempt
@@ -242,6 +242,7 @@ const Problem = (props) => {
                                             style={styles.flex_centered}
                                         >
                                             <TextField
+                                                role='textbox'
                                                 error={
                                                     isCorrect !== null
                                                         ? isCorrect
@@ -249,14 +250,14 @@ const Problem = (props) => {
                                                             : true
                                                         : false
                                                 }
-                                                //disabled={isCorrect}
+                                                data-testid={'problem_submission'}
                                                 key={item.index + '_c_input'}
                                                 id="outlined-basic"
                                                 label={
                                                     isCorrect !== null
                                                         ? isCorrect
-                                                            ? 'Correct'
-                                                            : 'Incorrect'
+                                                            ? 'Correct! :)'
+                                                            : 'Incorrect :('
                                                         : null
                                                 }
                                                 variant="outlined"
@@ -347,7 +348,7 @@ const Problem = (props) => {
                                             }}
                                             startIcon={<DoorBackIcon />}
                                         >
-                                            Finish
+                                            FINISH
                                         </Button>
                                     </Grid>
                                     <Grid
@@ -365,7 +366,7 @@ const Problem = (props) => {
                                                     checkAnswer(item.solution)
                                                 }}
                                             >
-                                                turn in
+                                                TURN IN
                                             </Button> : 
                                             <Button
                                                 color="primary"
@@ -374,7 +375,7 @@ const Problem = (props) => {
                                                     //checkIfAnswerGiven()
                                                     goNext()
                                                 }}>
-                                                Next
+                                                NEXT
                                             </Button>
                                         }
                                     </Grid>
@@ -396,7 +397,7 @@ const Problem = (props) => {
                                                 goNext()
                                             }}
                                         >
-                                            Skip <NavigateNextIcon />
+                                            SKIP <NavigateNextIcon />
                                         </Button>
                                     </Grid>
                                 </Grid>
