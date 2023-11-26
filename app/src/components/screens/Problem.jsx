@@ -61,10 +61,16 @@ const Problem = (props) => {
 
     const checkAnswer = (solution) => {
         if (Number(solution) === Number(answer)) {
-            if (!submitted) setNumCorrect(numCorrect + 1)
+            if (!submitted){
+                setNumCorrect(numCorrect + 1)
+                setNumProblemsAttempted(numProblemsAttempted + 1)
+            }
             setIsCorrect(true)
         } else {
-            if (!submitted) setNumIncorrect(numIncorrect + 1)
+            if (!submitted){
+                setNumIncorrect(numIncorrect + 1)
+                setNumProblemsAttempted(numProblemsAttempted + 1)
+            }
             setIsCorrect(false)
         }
         setSubmitted(true)
@@ -96,7 +102,7 @@ const Problem = (props) => {
         }
     }
 
-    const answerGivenCheck = () => {
+    const checkIfAnswerGiven = () => {
         if (!answer) {
             setNumSkipped(numSkipped + 1)
         } else {
@@ -243,6 +249,7 @@ const Problem = (props) => {
                                                             : true
                                                         : false
                                                 }
+                                                //disabled={isCorrect}
                                                 key={item.index + '_c_input'}
                                                 id="outlined-basic"
                                                 label={
@@ -269,9 +276,11 @@ const Problem = (props) => {
                                                 }}
                                                 autoFocus
                                                 onChange={(event) => {
-                                                    const val =
-                                                        event.target.value
-                                                    setAnswer(val)
+                                                    if(!isCorrect){
+                                                        const val =
+                                                            event.target.value
+                                                        setAnswer(val)
+                                                    }
                                                 }}
                                                 onKeyDown={(e) => {
                                                     if (e.key === 'Enter') {
@@ -328,7 +337,7 @@ const Problem = (props) => {
                                                 color: 'black',
                                             }}
                                             onClick={() => {
-                                                answerGivenCheck()
+                                                checkIfAnswerGiven()
                                                 navigate(SUMMARY, {
                                                     state: {
                                                         summary: summaryData,
@@ -347,16 +356,27 @@ const Problem = (props) => {
                                         justifyContent={'center'}
                                         alignItems={'center'}
                                     >
-                                        <Button
-                                            disabled={isCorrect}
-                                            color="primary"
-                                            variant="outlined"
-                                            onClick={() => {
-                                                checkAnswer(item.solution)
-                                            }}
-                                        >
-                                            turn in
-                                        </Button>
+                                        {!isCorrect ? 
+                                            <Button
+                                                // disabled={isCorrect}
+                                                color="primary"
+                                                variant="outlined"
+                                                onClick={() => {
+                                                    checkAnswer(item.solution)
+                                                }}
+                                            >
+                                                turn in
+                                            </Button> : 
+                                            <Button
+                                                color="primary"
+                                                variant="outlined"
+                                                onClick={() => {
+                                                    //checkIfAnswerGiven()
+                                                    goNext()
+                                                }}>
+                                                Next
+                                            </Button>
+                                        }
                                     </Grid>
                                     <Grid
                                         xs={2}
@@ -372,11 +392,11 @@ const Problem = (props) => {
                                                 alignItems: 'center',
                                             }}
                                             onClick={() => {
-                                                answerGivenCheck()
+                                                checkIfAnswerGiven()
                                                 goNext()
                                             }}
                                         >
-                                            Next <NavigateNextIcon />
+                                            Skip <NavigateNextIcon />
                                         </Button>
                                     </Grid>
                                 </Grid>
