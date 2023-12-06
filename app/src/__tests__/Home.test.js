@@ -4,7 +4,7 @@ import App from '../App'
 
 test('renders the Home screen title', () => {
     // Arrange
-    const headerTitle = 'Kiija Math Wizard'
+    const headerTitle = 'Kiija: A Math Practice Tool'
     const { getByText } = render(<App />)
 
     // Act

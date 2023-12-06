@@ -16,7 +16,7 @@ test('display a problem to the user', () => {
 
     render(
         <BrowserRouter>
-            <Problem type={'addition'} url={'http://dummy.api'} problems={mockData} request={{}}/>
+            <Problem type={'addition'} url={'http://localhost:8080/subjects/arithmetic/addition'} problems={mockData} request={{}}/>
         </BrowserRouter>
     );
 

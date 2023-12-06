@@ -42,6 +42,7 @@ const Problem = (props) => {
     const type = props?.type || state.type
     const url = props?.url || state.apiUrl
     const problemSetRequest = props?.request || state.request
+    const [totalCount, setTotalCount] = useState(1);
 
     const fetchMoreProblems = () => {
         const fetchProblemSet = async () => {
@@ -91,6 +92,7 @@ const Problem = (props) => {
         setAttempts(0)
         setIsCorrect(null)
         setSubmitted(false)
+        setTotalCount(totalCount+1)
         if (currentProblem + 1 < count) {
             if (currentProblem > count - 3) {
                 fetchMoreProblems()
@@ -154,7 +156,7 @@ const Problem = (props) => {
                                         sx={[styles.flex_centered]}
                                     >
                                         <h2 key={item.index + '_title_h2'}>
-                                            {type}
+                                            # {totalCount}
                                         </h2>
                                     </Grid>
                                     <Grid
