@@ -1,16 +1,15 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import Grid from '@mui/material/Unstable_Grid2';
-import Page from "../common/Page"
+import React from 'react'
+import { useLocation } from 'react-router-dom'
+import Grid from '@mui/material/Unstable_Grid2'
+import Page from '../common/Page'
 
 const Summary = (props) => {
-
     //const navigate = useNavigate();
-    const {state} = useLocation();
-    const summary = props.summary || state.summary;
-    const topic = props.topic || state.topic;
+    const { state } = useLocation()
+    const summary = props.summary || state.summary
+    const topic = props.topic || state.topic
 
-    return(
+    return (
         <Page>
             <Grid container>
                 <Grid xs={12}>
@@ -33,4 +32,4 @@ const Summary = (props) => {
     )
 }
 
-export default Summary;
+export default Summary

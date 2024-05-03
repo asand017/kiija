@@ -19,6 +19,8 @@ Arithmetic
 * Discrete Math
 * Linear Algebra
 
+[link to backend repo](https://github.com/asand017/kiija-services)
+
 ### Deploying backend
 1. cd kiija/kiija-services
 2. ./gradlew clean build
